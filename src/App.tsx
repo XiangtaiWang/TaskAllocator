@@ -146,7 +146,7 @@ const App: React.FC = () => {
     pointerCtx.clearRect(0, 0, pointerCanvas.width, pointerCanvas.height);
 
     // Draw pointers (fixed)
-    members.forEach((_, index) => {
+    members.forEach((member, index) => {
       const pointerAngle = (index * 360 / members.length) * Math.PI / 180;
       pointerCtx.beginPath();
       pointerCtx.moveTo(
@@ -164,6 +164,17 @@ const App: React.FC = () => {
       pointerCtx.closePath();
       pointerCtx.fillStyle = '#000';
       pointerCtx.fill();
+
+      // Draw member name
+      pointerCtx.font = '14px Arial';
+      pointerCtx.fillStyle = '#000';
+      pointerCtx.textAlign = pointerAngle < Math.PI / 2 || pointerAngle > 3 * Math.PI / 2 ? 'left' : 'right';
+      pointerCtx.textBaseline = 'middle';
+      const textOffset = 10; // Distance from pointer
+      const textX = centerX + (radius + textOffset) * Math.cos(pointerAngle);
+      const textY = centerY + (radius + textOffset) * Math.sin(pointerAngle);
+      pointerCtx.fillText(member.name, textX, textY);
+
     });
   }, [tasks, members, rotation]);
 
