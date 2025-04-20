@@ -65,6 +65,12 @@ const App: React.FC = () => {
     }, spinDuration);
   };
 
+  const reset = ()=>{
+    setSpinning(false)
+    setAssignments([])
+    setMembers([])
+    setTasks([])
+  }
   // Assign tasks based on final rotation
   const assignTasks = (finalRotation: number) => {
     const segmentAngle = 360 / tasks.length;
@@ -253,6 +259,12 @@ const App: React.FC = () => {
           className="action-button spin-button"
         >
           Spin
+        </button>
+        <button
+          onClick={reset}
+          className="action-button reset-button"
+        >
+          Reset
         </button>
       </div>
 

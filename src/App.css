@@ -68,7 +68,17 @@
 .spin-button:hover {
   background-color: #059669;
 }
+.reset-button {
+  background-color: #b91010;
+  color: white;
+  border: none;
+  margin-top: 16px;
+  padding: 8px 24px;
+}
 
+.reset-button:hover {
+  background-color: #960505;
+}
 .spin-button:disabled {
   background-color: #9ca3af;
   cursor: not-allowed;
