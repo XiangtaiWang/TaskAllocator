@@ -25,7 +25,21 @@ const App: React.FC = () => {
   const [taskInput, setTaskInput] = useState<string>('');
   const [assignments, setAssignments] = useState<Assignment[]>([]);
 
+  const shuffle = <T,>(array: T[]): T[] => {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+  };
   // Add member
+  const clearAll = () => {
+    setMembers([]);
+    setTasks([]);
+    setAssignments([]);
+  };
+
   const addMember = (e: FormEvent) => {
     e.preventDefault();
     if (memberInput.trim()) {
@@ -51,8 +65,9 @@ const App: React.FC = () => {
     }
 
     // Shuffle arrays
-    const shuffledMembers = [...members].sort(() => Math.random() - 0.5);
-    const shuffledTasks = [...tasks].sort(() => Math.random() - 0.5);
+    const shuffledMembers = shuffle(members)
+    const shuffledTasks = shuffle(tasks)
+
 
     // Assign tasks to members
     const newAssignments: Assignment[] = [];
@@ -102,7 +117,7 @@ const App: React.FC = () => {
 
       {/* Spin Button */}
       <button onClick={spinRoulette}>Spin the Roulette!</button>
-
+      <button onClick={clearAll}>Clear All</button>
       {/* Results */}
       {assignments.length > 0 && (
         <div>
